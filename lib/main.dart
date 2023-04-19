@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:untitled1/streamVideoPlayer/playStream.dart';
+import 'SSH_client/sshScreenConnection.dart';
 import 'list_video.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'second.dart';
@@ -23,7 +25,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => WelcomeScreen(),
         '/auth': (context) => SignInScreen(),
-        '/home': (context) => VideoListScreen()
+       // '/home': (context) => VideoListScreen(),
+        '/home' : (context) =>playStream()
+
       },
     );
   }
