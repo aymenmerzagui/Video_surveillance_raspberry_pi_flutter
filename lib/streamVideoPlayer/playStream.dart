@@ -1,35 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/second.dart';
-class playStream extends StatefulWidget {
-  const playStream({Key? key}) : super(key: key);
+import 'package:url_launcher/url_launcher.dart';
 
-  @override
-  State<playStream> createState() => _playStreamState();
-}
+class playStream extends StatelessWidget {
+  final String streamUrl='http://192.168.251.130:8081';
 
-class _playStreamState extends State<playStream> {
-  final urlController = TextEditingController();
+
+  void _launchURL() async {
+    if (!await canLaunch(streamUrl)) {
+      throw 'Could not launch $streamUrl';
+    }
+    await launch(streamUrl);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Stream'),),
-      body: Column(
-        children: [
-          Text('Donner url'),
-          TextField(
-            controller: urlController,
-            decoration: InputDecoration(
-              labelText: 'Stream',
-              border: OutlineInputBorder(),
-            ),
-          ),
-          ElevatedButton(onPressed: () =>
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                  VideoPlayerScreen(videoUrl: urlController.text,)))
-              , child: Text('Connect'))
-
-        ],
+      appBar: AppBar(
+        title: const Text('Play Stream'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: _launchURL,
+          child: const Text('Play Stream'),
+        ),
       ),
     );
   }
